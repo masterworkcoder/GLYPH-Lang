@@ -1,0 +1,50 @@
+(* M - language specification *)
+imp = 'import', '"', file, '"' ; (* preproccessor directive *)
+
+def = 'define', ident, replacement ; (* preproccessor directive *)
+
+statement = assign | dec | if ;
+
+(* need to finish filling in the if statement *)
+if = "if", "(", ")", { statement }, "end if" ;
+
+assign = dec, "=", { letter | digit | "_" | ident } 
+	   | ident, "=" { letter | digit | "_" | ident };
+
+(* need to decide how to handle constants *)
+(* type alias doesn't require an alias type *)
+dec = "dec", ident, ":", type, [ "int" | "float" | "char" | "bool" | ident ] ;
+
+type = "alias" | "var" | "const" ;
+
+(* Mathematic Operators *)
+expression = expression, [ "*" | "/" ], expression
+		   | expression, [ "+" | "-" ], expression
+		   | int
+		   | float
+		   | bool
+		   | char
+		   | ident
+		   | "(", expression, ")" ;
+
+(* specify the data types *)
+int = number;
+float = number, ".", { digit } ;
+char = "'", ? Any ASCII Character ? "'" ;
+char_too = '"', ? Any ASCII Character ?, '"' ;
+bool = "0" | "1" ;
+ident = letter, [ letter | digit | "_" ] ;
+
+(* Lower Case and Upper Case characters *)
+letter = "A" | "B" | "C" | "D" | "E" | "F" | "G"
+	   | "H" | "I" | "J" | "K" | "L" | "M" | "N"
+	   | "O" | "P" | "Q" | "R" | "S" | "T" | "U"
+	   | "V" | "W" | "X" | "Y" | "Z" | "a" | "b"
+	   | "c" | "d" | "e" | "f" | "g" | "h" | "i"
+	   | "j" | "k" | "l" | "m" | "n" | "o" | "p"
+	   | "q" | "r" | "s" | "t" | "u" | "v" | "w"
+	   | "x" | "y" | "z" ;
+	   
+digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ; (* 0 - 9 *)
+number = [ "-" ], { digit } ; (* a proper number, still need digit to help with floats *)
+WS = "\n" | "\t" | "\r" | " " | ? Any White Space Characters ? ; (* White Space *)
