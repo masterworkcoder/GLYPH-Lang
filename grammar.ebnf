@@ -1,4 +1,4 @@
-(* M - language specification *)
+(* GLYPH - language specification *)
 imp = 'import', '"', file, '"' ; (* preproccessor directive *)
 
 def = 'define', ident, replacement ; (* preproccessor directive *)
