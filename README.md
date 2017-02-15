@@ -1,6 +1,7 @@
 # GLYPH
 A programming language designed to be minimal and freestanding intended for osdev and general purpose use.
 
+Currently there is only a small standard library planned to do some very basic things.
 ### Examples
 Kernel
 ```
@@ -21,6 +22,7 @@ end func
 
 General Purpose
 ```
+; The io library is simply a possible standard library
 import "io"
 
 dec main:func void(void)
